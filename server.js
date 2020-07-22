@@ -1,17 +1,17 @@
 const http = require("http");
 const notifier = require("node-notifier");
-const servidor = require("./lib");
+const server = require("./lib");
 const better = require('./better');
 
 
-servidor
+server
   .createServer(function(request, response) {
     request.write();
     response.write("Response test");
   })
   .exec("dir", function(error, msg) {
     if (error) {
-      return console.log("Ha ocurrido un error: " + msg);
+      return console.log("Something went wrong " + msg);
     }
 
     console.log(msg);
@@ -25,7 +25,7 @@ better.exec(function (error, message) {
     return console.log(message);
   }
 
-  return console.log("Todo ok");
+  return console.log("ok");
 });
 
 
@@ -34,14 +34,14 @@ if (error) {
 }
 
 http.createServer(function (req, res) {
-    res.statusCode(200).json({ message: "Este es un mensaje del servidor "});
+    res.statusCode(200).json({ message: "Message from server"});
     res.end();
 }).listen(8000);
 
 
 http
   .createServer(function(request, response) {
-    console.log("Iniciando respuesta desde el servidor");
+    console.log("Init server response");
     console.log(request);
     response.writeHead(401, {
       "Content-type": "text/html",
